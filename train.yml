@@ -1,28 +1,27 @@
 #### Conv-TasNet Setting
 name: Conv_Tasnet
-gpu_ids: [0,1,2,3,6,7]
-#gpu_ids: [0]
-epochs: 100
+gpu_ids: [0]
+epochs: 50
 
 #### Dataset Configure
 datasets:
   num_workers: 4
-  batch_size: 20
-  fs: 8000
+  batch_size: 4
+  fs: 16000
   chunk_len: 4
   chunk_size: 32000 #### fs*chunk_len
   train:
     mix_scp: /Users/data/musanmaestro/create_scp/tr_mix.scp
-    ref_scp: 
+    ref_scp:
       - /Users/data/musanmaestro/create_scp/tr_s1.scp
       - /Users/data/musanmaestro/create_scp/tr_s2.scp
-    sr: 8000
+    sr: 16000
   val:
     mix_scp: /Users/data/musanmaestro/create_scp/cv_mix.scp
-    ref_scp: 
+    ref_scp:
       - /Users/data/musanmaestro/create_scp/cv_s1.scp
       - /Users/data/musanmaestro/create_scp/cv_s2.scp
-    sr: 8000
+    sr: 16000
 
 #### training settings: learning rate scheme, loss
 train:
@@ -32,7 +31,7 @@ train:
   factor: 0.5
   logging_period: 200
   clip_norm: 200
-  num_epochs: 3
+  num_epochs: 50
   checkpoint: Conv-TasNet-new
 
 optimizer_kwargs:
@@ -51,8 +50,7 @@ net_conf:
   norm: gln
   num_spks: 2
   activate: relu
-  causal: false
-  ##skip_con: false
+  causal: true
 
 #### resume model
 resume:

@@ -7,7 +7,7 @@ import argparse
 from torch.nn.parallel import data_parallel
 from Conv_TasNet import ConvTasNet
 from utils import get_logger
-from option import parse
+from options.option import parse
 import tqdm
 
 
@@ -17,7 +17,7 @@ class Separation():
         self.mix = read_wav(mix_path)
         opt = parse(yaml_path, is_tain=False)
         net = ConvTasNet(**opt['net_conf'])
-        dicts = torch.load(model, map_location='cpu')
+        dicts = torch.jit.load(model, map_location='cpu')
         net.load_state_dict(dicts["model_state_dict"])
         self.logger = get_logger(__name__)
         self.logger.info('Load checkpoint from {}, epoch {: d}'.format(model, dicts["epoch"]))
@@ -45,25 +45,27 @@ class Separation():
                 os.makedirs(file_path+'/spk'+str(index), exist_ok=True)
                 filename=file_path+'/spk'+str(index)+'/test.wav'
                 print(s.shape)
-                write_wav(filename, s.unsqueeze(0), 8000)
+                write_wav(filename, s.unsqueeze(0), 16000)
         self.logger.info("Compute over {:d} utterances".format(len(self.mix)))
 
 
 def main():
     parser=argparse.ArgumentParser()
+
     parser.add_argument(
-        '-mix_scp', type=str, default='./Conv-TasNet/test.wav', help='Path to mix scp file.')
+        '-mix_wav', type=str, default='./test.wav', help='Path to mix scp file.')
     parser.add_argument(
-        '-yaml', type=str, default='./Conv-TasNet/options/train/train.yml', help='Path to yaml file.')
+        '-yaml', type=str, default='./train.yml', help='Path to yaml file.')
     parser.add_argument(
-        '-model', type=str, default='./Conv-TasNet/Conv-TasNet/best_1.pt', help="Path to model file.")
+        '-model', type=str, default='./best.pt', help="Path to model file.")
     parser.add_argument(
         '-gpuid', type=str, default='0', help='Enter GPU id number')
     parser.add_argument(
-        '-save_path', type=str, default='./test', help='save result path')
+        '-save_path', type=str, default='./non-pit-2', help='save result path')
+
     args=parser.parse_args()
     gpuid=[int(i) for i in args.gpuid.split(',')]
-    separation=Separation(args.mix_scp, args.yaml, args.model, gpuid)
+    separation=Separation(args.mix_wav, args.yaml, args.model, gpuid)
     separation.inference(args.save_path)
 
 

@@ -7,17 +7,17 @@ import argparse
 from torch.nn.parallel import data_parallel
 from Conv_TasNet import ConvTasNet
 from utils import get_logger
-from option import parse
+from options.option import parse
 import tqdm
 
 
 class Separation():
     def __init__(self, mix_path, yaml_path, model, gpuid):
         super(Separation, self).__init__()
-        self.mix = AudioReader(mix_path, sample_rate=8000)
+        self.mix = AudioReader(mix_path, sample_rate=16000)
         opt = parse(yaml_path, is_tain=False)
         net = ConvTasNet(**opt['net_conf'])
-        dicts = torch.load(model, map_location='cpu')
+        dicts = torch.jit.load(model, map_location='cpu')
         net.load_state_dict(dicts["model_state_dict"])
         self.logger = get_logger(__name__)
         self.logger.info('Load checkpoint from {}, epoch {: d}'.format(model, dicts["epoch"]))
@@ -53,11 +53,11 @@ class Separation():
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument(
-        '-mix_scp', type=str, default='../create_scp/tt_mix.scp', help='Path to mix scp file.')
+        '-mix_scp', type=str, default='/Users/data/musanmaestro/create_scp/tt_mix.scp', help='Path to mix scp file.')
     parser.add_argument(
-        '-yaml', type=str, default='./options/train/train.yml', help='Path to yaml file.')
+        '-yaml', type=str, default='./train.yml', help='Path to yaml file.')
     parser.add_argument(
-        '-model', type=str, default='./Conv-TasNet-non-pit-2/best.pt', help="Path to model file.")
+        '-model', type=str, default='./best.pt', help="Path to model file.")
     parser.add_argument(
         '-gpuid', type=str, default='0', help='Enter GPU id number')
     parser.add_argument(
