@@ -13,14 +13,14 @@ This repository is based on [JusperLee's repository](https://github.com/JusperLe
     ```
 - using pip:
     ```
-    pip install yaml torchaudio tqdm -y
+    pip install pyyaml torchaudio tqdm -y
     ```
 
 ---
 
 ## 1. Prepare dataset and codes
 
-- `data_gdown.py` downloads MUSAN-MAESTRO dataset from [google drive](https://drive.google.com/file/d/1Sm6fu8vXzRk6PrwFfYEvXGFpKMNPXPzv/) which was created
+- `prepare_data.py` downloads MUSAN-MAESTRO dataset from [google drive](https://drive.google.com/file/d/1Sm6fu8vXzRk6PrwFfYEvXGFpKMNPXPzv/), and create scp running `create_scp`.
 
 ```
 python prepare_data.py
