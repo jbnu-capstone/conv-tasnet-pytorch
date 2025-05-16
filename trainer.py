@@ -129,7 +129,7 @@ class Trainer():
             "adadelta": torch.optim.Adadelta,  # weight_decay, lr
             "adagrad": torch.optim.Adagrad,  # lr, lr_decay, weight_decay
             "adamax": torch.optim.Adamax,  # lr, weight_decay
-            "adamaw": torch.optim.AdamW  # lr, weight_decay
+            "adamw": torch.optim.AdamW  # lr, weight_decay
         }
         if optimizer not in supported_optimizer:
             raise ValueError("Now only support optimizer {}".format(optimizer))

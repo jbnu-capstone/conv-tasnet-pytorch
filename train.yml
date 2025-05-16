@@ -32,7 +32,7 @@ train:
   logging_period: 200
   clip_norm: 200
   num_epochs: 100
-  checkpoint: Conv-TasNet-new
+  checkpoint: conv-tasnet-new
 
 optimizer_kwargs:
   lr: !!float 1e-3
@@ -54,5 +54,5 @@ net_conf:
 
 #### resume model
 resume:
-  path: ./models/output
+  path: models
   resume_state: false
