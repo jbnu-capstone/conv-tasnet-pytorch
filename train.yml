@@ -6,7 +6,7 @@ epochs: 100
 #### Dataset Configure
 datasets:
   num_workers: 4
-  batch_size: 8
+  batch_size: 16
   fs: 16000
   chunk_len: 4
   chunk_size: 32000 #### fs*chunk_len
