@@ -1,7 +1,7 @@
 #### Conv-TasNet Setting
 name: Conv_Tasnet
 gpu_ids: [0]
-epochs: 50
+epochs: 100
 
 #### Dataset Configure
 datasets:
@@ -27,11 +27,11 @@ datasets:
 train:
   optimizer: adam
   min_lr: !!float 1e-8
-  patience: 2
+  patience: 6
   factor: 0.5
   logging_period: 200
   clip_norm: 200
-  num_epochs: 50
+  num_epochs: 100
   checkpoint: Conv-TasNet-new
 
 optimizer_kwargs:
