@@ -11,16 +11,16 @@ datasets:
   chunk_len: 4
   chunk_size: 32000 #### fs*chunk_len
   train:
-    mix_scp: /Users/data/musanmaestro/create_scp/tr_mix.scp
+    mix_scp: ./dataset/create_scp/tr_mix.scp
     ref_scp:
-      - /Users/data/musanmaestro/create_scp/tr_s1.scp
-      - /Users/data/musanmaestro/create_scp/tr_s2.scp
+      - ./dataset/create_scp/tr_s1.scp
+      - ./dataset/create_scp/tr_s2.scp
     sr: 16000
   val:
-    mix_scp: /Users/data/musanmaestro/create_scp/cv_mix.scp
+    mix_scp: ./dataset/create_scp/cv_mix.scp
     ref_scp:
-      - /Users/data/musanmaestro/create_scp/cv_s1.scp
-      - /Users/data/musanmaestro/create_scp/cv_s2.scp
+      - ./dataset/create_scp/cv_s1.scp
+      - ./dataset/create_scp/cv_s2.scp
     sr: 16000
 
 #### training settings: learning rate scheme, loss
@@ -54,5 +54,5 @@ net_conf:
 
 #### resume model
 resume:
-  path: /Users/data/Conv-TasNet
+  path: ./models/output
   resume_state: false

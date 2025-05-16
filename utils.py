@@ -43,4 +43,4 @@ def get_logger(name, format_str="%(asctime)s [%(pathname)s:%(lineno)s - %(leveln
 
 
 if __name__ == "__main__":
-    print(len(handle_scp('/Users/data/musanmaestro/create_scp/cv_s2.scp')))
+    print(len(handle_scp('./dataset/create_scp/cv_s2.scp')))

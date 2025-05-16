@@ -7,6 +7,8 @@ This repository is based on [JusperLee's repository](https://github.com/JusperLe
 ## 0. Requirements
 - using conda/miniforge/mamba:
     ```
+    conda create --name ctnp
+    conda activate ctnp
     conda install yaml torchaudio tqdm -y
     ```
 - using pip:
@@ -17,17 +19,17 @@ This repository is based on [JusperLee's repository](https://github.com/JusperLe
 ---
 
 ## 1. Prepare dataset and codes
-- Dataset must be located in the exact directory: **'/Users/data/musanmaestro'**. If not, many parts of code will need to be modified to match your dataset path.
-    ```
-    git clone https://github.com/jbnu-capstone/musanmaestro.git /Users/data/musanmaestro
-    git clone https://github.com/jbnu-capstone/conv-tasnet-pytorch
-    cd conv-tasnet-pytorch
-    ```
+
+- `data_gdown.py` downloads MUSAN-MAESTRO dataset from [google drive](https://drive.google.com/file/d/1Sm6fu8vXzRk6PrwFfYEvXGFpKMNPXPzv/) which was created
+
+```
+python prepare_data.py
+```
    
 ---
 
 ## 2. Run code
-The following command will train a model using scp files located in "/Users/data/musanmaestro/create_scp", which is specified in **train.yml** file.
+The following command will train a model using scp files located in "./dataset/create_scp", which is specified in **train.yml** file.
 ```
 python train.py
 ```

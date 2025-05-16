@@ -78,6 +78,6 @@ class AudioReader(object):
 
 
 if __name__ == "__main__":
-    r = AudioReader('/Users/data/musanmaestro/create_scp/cv_s2.scp')
+    r = AudioReader('./dataset/create_scp/cv_s2.scp')
     index = 0
     print(r[1])

@@ -1,22 +1,43 @@
 import os
+import subprocess
 
-train_mix_scp = 'tr_mix.scp'
-train_s1_scp = 'tr_s1.scp'
-train_s2_scp = 'tr_s2.scp'
+ROOT_DIR = "./dataset"
 
-test_mix_scp = 'tt_mix.scp'
-test_s1_scp = 'tt_s1.scp'
-test_s2_scp = 'tt_s2.scp'
+# scp name
+SCP_DIR = f'{ROOT_DIR}/create_scp'
 
-train_mix = '/Users/data/musanmaestro/tr/mix'
-train_s1 = '/Users/data/musanmaestro/tr/s1'
-train_s2 = '/Users/data/musanmaestro/tr/s2'
+train_mix_scp = f'{SCP_DIR}/tr_mix.scp'
+train_s1_scp = f'{SCP_DIR}/tr_s1.scp'
+train_s2_scp = f'{SCP_DIR}/tr_s2.scp'
 
-test_mix = '/Users/data/musanmaestro/tt/mix'
-test_s1 = '/Users/data/musanmaestro/tt/s1'
-test_s2 = '/Users/data/musanmaestro/tt/s2'
+test_mix_scp = f'{SCP_DIR}/tt_mix.scp'
+test_s1_scp = f'{SCP_DIR}/tt_s1.scp'
+test_s2_scp = f'{SCP_DIR}/tt_s2.scp'
 
+cv_mix_scp = f'{SCP_DIR}/cv_mix.scp'
+cv_s1_scp = f'{SCP_DIR}/cv_s1.scp'
+cv_s2_scp = f'{SCP_DIR}/cv_s2.scp'
+
+# data folder name
+DATA_DIR = f'{ROOT_DIR}/data'
+
+train_mix = f'{DATA_DIR}/tr/mix'
+train_s1 = f'{DATA_DIR}/tr/s1'
+train_s2 = f'{DATA_DIR}/tr/s2'
+
+test_mix = f'{DATA_DIR}/tt/mix'
+test_s1 = f'{DATA_DIR}/tt/s1'
+test_s2 = f'{DATA_DIR}/tt/s2'
+
+cv_mix = f'{DATA_DIR}/cv/mix'
+cv_s1 = f'{DATA_DIR}/cv/s1'
+cv_s2 = f'{DATA_DIR}/cv/s2'
+
+subprocess.run(["mkdir","./dataset/create_scp"])
+
+# train -----
 tr_mix = open(train_mix_scp,'w')
+
 for root, dirs, files in os.walk(train_mix):
     files.sort()
     for file in files:
@@ -40,7 +61,7 @@ for root, dirs, files in os.walk(train_s2):
         tr_s2.write('\n')
 
 
-
+# test -----
 tt_mix = open(test_mix_scp,'w')
 for root, dirs, files in os.walk(test_mix):
     files.sort()
@@ -64,14 +85,8 @@ for root, dirs, files in os.walk(test_s2):
         tt_s2.write(file+" "+root+'/'+file)
         tt_s2.write('\n')
 
-cv_mix_scp = 'cv_mix.scp'
-cv_s1_scp = 'cv_s1.scp'
-cv_s2_scp = 'cv_s2.scp'
 
-cv_mix = '/Users/data/musanmaestro/cv/mix'
-cv_s1 = '/Users/data/musanmaestro/cv/s1'
-cv_s2 = '/Users/data/musanmaestro/cv/s2'
-
+# cross validation -----
 cv_mix_file = open(cv_mix_scp,'w')
 for root, dirs, files in os.walk(cv_mix):
     files.sort()
