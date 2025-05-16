@@ -4,10 +4,9 @@ import sys
 sys.path.append('./options')
 from AudioReader import AudioReader, write_wav
 import argparse
-from torch.nn.parallel import data_parallel
 from Conv_TasNet import ConvTasNet
 from utils import get_logger
-from options.option import parse
+from option import parse
 import tqdm
 
 
@@ -17,7 +16,7 @@ class Separation():
         self.mix = AudioReader(mix_path, sample_rate=16000)
         opt = parse(yaml_path, is_tain=False)
         net = ConvTasNet(**opt['net_conf'])
-        dicts = torch.jit.load(model, map_location='cpu')
+        dicts = torch.load(model, map_location='cpu')
         net.load_state_dict(dicts["model_state_dict"])
         self.logger = get_logger(__name__)
         self.logger.info('Load checkpoint from {}, epoch {: d}'.format(model, dicts["epoch"]))

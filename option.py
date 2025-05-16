@@ -1,6 +1,6 @@
 import os
 import sys
-sys.path.append('..')
+sys.path.append('')
 from utils import get_logger
 import yaml
 
@@ -25,4 +25,4 @@ def parse(opt_path, is_tain=True):
 
 
 if __name__ == "__main__":
-    parse('../train.yml')
+    parse('train.yml')

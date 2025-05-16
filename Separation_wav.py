@@ -2,13 +2,11 @@ import os
 import torch
 import sys
 sys.path.append('./options')
-from AudioReader import AudioReader, write_wav, read_wav
+from AudioReader import write_wav, read_wav
 import argparse
-from torch.nn.parallel import data_parallel
 from Conv_TasNet import ConvTasNet
 from utils import get_logger
-from options.option import parse
-import tqdm
+from option import parse
 
 
 class Separation():
@@ -17,7 +15,7 @@ class Separation():
         self.mix = read_wav(mix_path)
         opt = parse(yaml_path, is_tain=False)
         net = ConvTasNet(**opt['net_conf'])
-        dicts = torch.jit.load(model, map_location='cpu')
+        dicts = torch.load(model, map_location='cpu')
         net.load_state_dict(dicts["model_state_dict"])
         self.logger = get_logger(__name__)
         self.logger.info('Load checkpoint from {}, epoch {: d}'.format(model, dicts["epoch"]))
@@ -42,8 +40,8 @@ class Separation():
                 #norm
                 s = s*norm/torch.max(torch.abs(s))
                 index += 1
-                os.makedirs(file_path+'/spk'+str(index), exist_ok=True)
-                filename=file_path+'/spk'+str(index)+'/test.wav'
+                os.makedirs(file_path, exist_ok=True)
+                filename=file_path+'/'+str(index)+'_test.wav'
                 print(s.shape)
                 write_wav(filename, s.unsqueeze(0), 16000)
         self.logger.info("Compute over {:d} utterances".format(len(self.mix)))
@@ -53,21 +51,20 @@ def main():
     parser=argparse.ArgumentParser()
 
     parser.add_argument(
-        '-mix_wav', type=str, default='./test.wav', help='Path to mix scp file.')
+        '-mix_wav', type=str, default='./test.wav', help='Path to mix wav file.')
     parser.add_argument(
         '-yaml', type=str, default='./train.yml', help='Path to yaml file.')
     parser.add_argument(
-        '-model', type=str, default='./best.pt', help="Path to model file.")
+        '-model', type=str, default='./models/best.pt', help="Path to model file.")
     parser.add_argument(
         '-gpuid', type=str, default='0', help='Enter GPU id number')
     parser.add_argument(
-        '-save_path', type=str, default='./non-pit-2', help='save result path')
+        '-save_path', type=str, default='./output', help='save result path')
 
     args=parser.parse_args()
     gpuid=[int(i) for i in args.gpuid.split(',')]
     separation=Separation(args.mix_wav, args.yaml, args.model, gpuid)
     separation.inference(args.save_path)
-
 
 if __name__ == "__main__":
     main()
