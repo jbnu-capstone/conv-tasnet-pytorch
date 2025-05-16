@@ -1,6 +1,12 @@
 # Conv TasNet
 
 This repository is based on [JusperLee's repository](https://github.com/JusperLee/Conv-TasNet).
+```
+# Running train.py immediately on cloud environment with MUSAN-MAESTRO-v2000-500-500
+git clone --branch relative_process --single-branch https://github.com/jbnu-capstone/conv-tasnet-pytorch
+pip install pyyaml torchaudio tqdm soundfile
+python prepare_data.py; train.py;
+```
 
 ---
 
@@ -9,11 +15,11 @@ This repository is based on [JusperLee's repository](https://github.com/JusperLe
     ```
     conda create --name ctnp
     conda activate ctnp
-    conda install yaml torchaudio tqdm -y
+    conda install pyyaml torchaudio tqdm soundfile -y
     ```
 - using pip:
     ```
-    pip install pyyaml torchaudio tqdm -y
+    pip install pyyaml torchaudio tqdm soundfile
     ```
 
 ---
