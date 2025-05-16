@@ -49,7 +49,7 @@ class Trainer():
     def __init__(self,
                  net,
                  checkpoint="checkpoint",
-                 optimizer="adam",
+                 optimizer="adamw",
                  gpuid=0,
                  optimizer_kwargs=None,
                  clip_norm=None,
@@ -128,7 +128,8 @@ class Trainer():
             "adam": torch.optim.Adam,  # weight_decay, lr
             "adadelta": torch.optim.Adadelta,  # weight_decay, lr
             "adagrad": torch.optim.Adagrad,  # lr, lr_decay, weight_decay
-            "adamax": torch.optim.Adamax  # lr, weight_decay
+            "adamax": torch.optim.Adamax,  # lr, weight_decay
+            "adamaw": torch.optim.AdamW  # lr, weight_decay
         }
         if optimizer not in supported_optimizer:
             raise ValueError("Now only support optimizer {}".format(optimizer))
