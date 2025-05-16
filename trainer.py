@@ -99,7 +99,7 @@ class Trainer():
 
         # Reduce lr
         self.scheduler = ReduceLROnPlateau(
-            self.optimizer, mode='min', factor=0.5, patience=patience, verbose=True, min_lr=min_lr)
+            self.optimizer, mode='min', factor=0.5, patience=patience, min_lr=min_lr)
 
         # logging
         self.logger.info("Starting preparing model ............")
