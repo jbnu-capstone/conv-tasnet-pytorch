@@ -27,7 +27,7 @@ datasets:
 train:
   optimizer: adamw
   min_lr: !!float 1e-8
-  patience: 2
+  patience: 6
   factor: 0.5
   logging_period: 200
   clip_norm: 200
