@@ -4,7 +4,7 @@ This repository is based on [JusperLee's repository](https://github.com/JusperLe
 ```
 # Running train.py immediately on cloud environment with MUSAN-MAESTRO-v2000-500-500
 git clone --branch relative_process --single-branch https://github.com/jbnu-capstone/conv-tasnet-pytorch
-pip install pyyaml torchaudio tqdm soundfile
+pip install pyyaml torchaudio tqdm soundfile matplotlib
 cd conv-tasnet-pytorch; python prepare_data.py; train.py;
 ```
 
