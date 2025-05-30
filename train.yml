@@ -6,33 +6,33 @@ epochs: 100
 #### Dataset Configure
 datasets:
   num_workers: 4
-  batch_size: 4
-  fs: 16000
+  batch_size: 16
+  fs: 22050
   chunk_len: 4
-  chunk_size: 32000 #### fs*chunk_len
+  chunk_size: 88200 #### fs*chunk_len
   train:
-    mix_scp: /Users/data/musanmaestro/create_scp/tr_mix.scp
+    mix_scp: ./dataset/create_scp/tr_mix.scp
     ref_scp:
-      - /Users/data/musanmaestro/create_scp/tr_s1.scp
-      - /Users/data/musanmaestro/create_scp/tr_s2.scp
-    sr: 16000
+      - ./dataset/create_scp/tr_s1.scp
+      - ./dataset/create_scp/tr_s2.scp
+    sr: 22050
   val:
-    mix_scp: /Users/data/musanmaestro/create_scp/cv_mix.scp
+    mix_scp: ./dataset/create_scp/cv_mix.scp
     ref_scp:
-      - /Users/data/musanmaestro/create_scp/cv_s1.scp
-      - /Users/data/musanmaestro/create_scp/cv_s2.scp
-    sr: 16000
+      - ./dataset/create_scp/cv_s1.scp
+      - ./dataset/create_scp/cv_s2.scp
+    sr: 22050
 
 #### training settings: learning rate scheme, loss
 train:
-  optimizer: adam
+  optimizer: adamw
   min_lr: !!float 1e-8
   patience: 6
   factor: 0.5
   logging_period: 200
   clip_norm: 200
   num_epochs: 100
-  checkpoint: Conv-TasNet-new
+  checkpoint: conv-tasnet-new
 
 optimizer_kwargs:
   lr: !!float 1e-3
@@ -54,5 +54,5 @@ net_conf:
 
 #### resume model
 resume:
-  path: /Users/data/Conv-TasNet
+  path: models
   resume_state: false

@@ -156,8 +156,8 @@ class DataLoaders():
 
 
 if __name__ == "__main__":
-    datasets = Datasets('/Users/data/musanmaestro/create_scp/cv_mix.scp',
-                        ['/Users/data/musanmaestro/create_scp/cv_s1.scp', '/Users/data/musanmaestro/create_scp/cv_s2.scp'])
+    datasets = Datasets('./dataset/create_scp/cv_mix.scp',
+                        ['./dataset/create_scp/cv_s1.scp', './dataset/create_scp/cv_s2.scp'])
     dataloaders = DataLoaders(datasets, num_workers=0,
                               batch_size=10, is_train=False)
     for eg in dataloaders:

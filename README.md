@@ -2,32 +2,46 @@
 
 This repository is based on [JusperLee's repository](https://github.com/JusperLee/Conv-TasNet).
 
+### Running train.py immediately on cloud environment with MUSAN-MAESTRO-v2000-500-500
+
+```
+git clone --branch relative_process --single-branch https://github.com/jbnu-capstone/conv-tasnet-pytorch
+```
+```
+pip install pyyaml torchaudio tqdm soundfile matplotlib
+```
+```
+cd conv-tasnet-pytorch; python prepare_data.py; python train.py;
+```
+
 ---
 
 ## 0. Requirements
 - using conda/miniforge/mamba:
     ```
-    conda install yaml torchaudio tqdm -y
+    conda create --name ctnp
+    conda activate ctnp
+    conda install pyyaml torchaudio tqdm soundfile matplotlib -y
     ```
 - using pip:
     ```
-    pip install yaml torchaudio tqdm -y
+    pip install pyyaml torchaudio tqdm soundfile matplotlib
     ```
 
 ---
 
 ## 1. Prepare dataset and codes
-- Dataset must be located in the exact directory: **'/Users/data/musanmaestro'**. If not, many parts of code will need to be modified to match your dataset path.
-    ```
-    git clone https://github.com/jbnu-capstone/musanmaestro.git /Users/data/musanmaestro
-    git clone https://github.com/jbnu-capstone/conv-tasnet-pytorch
-    cd conv-tasnet-pytorch
-    ```
+
+- `prepare_data.py` downloads MUSAN-MAESTRO dataset from [google drive](https://drive.google.com/file/d/1Sm6fu8vXzRk6PrwFfYEvXGFpKMNPXPzv/), and create scp running `create_scp`.
+
+```
+python prepare_data.py
+```
    
 ---
 
 ## 2. Run code
-The following command will train a model using scp files located in "/Users/data/musanmaestro/create_scp", which is specified in **train.yml** file.
+The following command will train a model using scp files located in "./dataset/create_scp", which is specified in **train.yml** file.
 ```
 python train.py
 ```

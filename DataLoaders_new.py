@@ -90,6 +90,6 @@ class Datasets(Dataset):
 
 
 if __name__ == "__main__":
-    datasets = Datasets('/Users/data/musanmaestro/create_scp/cv_mix.scp',
-                        ['Users/data/musanmaestro/create_scp/cv_s1.scp', '/Users/data/musanmaestro/create_scp/cv_s2.scp'])
+    datasets = Datasets('./dataset/create_scp/cv_mix.scp',
+                        ['./dataset/create_scp/cv_s1.scp', './dataset/create_scp/cv_s2.scp'])
     print(datasets.key.index('012c020o_1.2887_409o0319_-1.2887.wav'))
