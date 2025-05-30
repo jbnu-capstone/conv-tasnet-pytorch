@@ -2,55 +2,51 @@
 
 This repository is based on [JusperLee's repository](https://github.com/JusperLee/Conv-TasNet).
 
-### Running train.py immediately on cloud environment with MUSAN-MAESTRO-v2000-500-500
+## Quick Start
 
 ```
-git clone --branch relative_process --single-branch https://github.com/jbnu-capstone/conv-tasnet-pytorch
-```
-```
-pip install pyyaml torchaudio tqdm soundfile matplotlib
-```
-```
-cd conv-tasnet-pytorch; python prepare_data.py; python train.py;
-```
+git clone https://github.com/jbnu-capstone/conv-tasnet-pytorch
+cd conv-tasnet-pytorch
+conda env create -f environment.yml; conda activate ctnp
 
----
-
-## 0. Requirements
-- using conda/miniforge/mamba:
-    ```
-    conda create --name ctnp
-    conda activate ctnp
-    conda install pyyaml torchaudio tqdm soundfile matplotlib -y
-    ```
-- using pip:
-    ```
-    pip install pyyaml torchaudio tqdm soundfile matplotlib
-    ```
-
----
-
-## 1. Prepare dataset and codes
-
-- `prepare_data.py` downloads MUSAN-MAESTRO dataset from [google drive](https://drive.google.com/file/d/1Sm6fu8vXzRk6PrwFfYEvXGFpKMNPXPzv/), and create scp running `create_scp`.
-
-```
 python prepare_data.py
-```
-   
----
-
-## 2. Run code
-The following command will train a model using scp files located in "./dataset/create_scp", which is specified in **train.yml** file.
-```
 python train.py
 ```
 
+## Requirements
+- python = 3.7
+- tqdm
+- pyyaml
+- torchaudio
+- soundfile
+- matplotlib
+
 ---
 
-## 3. Inference
-The following command will separate **"train.wav"** file located in the working directory into 2 stems: piano and others. You can specify the name or directory of the target file or model. 
+
+## Inference
 ```
 python Separation_wav.py -mix_wav train.wav -model ./models/best.pt
 ```
 - other options: `-gpuid`, `-yaml`, `-save_path`
+
+
+## Using Custom Data
+
+Should have a structure like following:
+
+```
+data/
+├── cv/
+│   ├── mix/
+│   ├── s1/
+│   └── s2/
+├── tr/
+│   ├── mix/
+│   ├── s1/
+│   └── s2/
+└── tt/
+    ├── mix/
+    ├── s1/
+    └── s2/
+```

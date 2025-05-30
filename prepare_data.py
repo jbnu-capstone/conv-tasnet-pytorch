@@ -6,7 +6,7 @@ import shutil
 import zipfile
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--gd_id', type=str, default="1AeLxV4qEaPs0GYZgkQCkQTitz5egT_MV")
+parser.add_argument('--gd_id', type=str, default="109HEAeIQqfRS4NB_GnVvaq3TkXJ3BXMq")
 parser.add_argument('-f', action='store_true')
 args = parser.parse_args()
 
