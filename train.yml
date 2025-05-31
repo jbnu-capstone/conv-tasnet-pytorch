@@ -25,7 +25,7 @@ datasets:
 
 #### training settings: learning rate scheme, loss
 train:
-  optimizer: adamw
+  optimizer: adam
   min_lr: !!float 1e-8
   patience: 6
   factor: 0.5
@@ -36,7 +36,7 @@ train:
 
 optimizer_kwargs:
   lr: !!float 1e-3
-  weight_decay: !!float 1e-5
+  weight_decay: !!float 1e-4
 
 #### network configure
 net_conf:
