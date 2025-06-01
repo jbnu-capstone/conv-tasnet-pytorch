@@ -4,6 +4,8 @@ This repository is based on [JusperLee's repository](https://github.com/JusperLe
 
 ## Quick Start
 
+runs on Linux 
+
 ```
 git clone https://github.com/jbnu-capstone/conv-tasnet-pytorch
 cd conv-tasnet-pytorch
